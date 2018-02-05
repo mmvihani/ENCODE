@@ -1,0 +1,324 @@
+# Parsing out information from ENCODE file names
+
+import sys
+def main():
+
+	with open(sys.argv[1],'r') as input:
+		newlist = []
+		for line in input:
+			line = line.rstrip()
+			newlist.append(line)
+			
+		
+		file1 = 'BroadHistone'
+		file2 = 'OpenChrom'
+       		file3 = 'SydhTfbs'
+        	file4 = 'UwHistone'
+		
+		cellline = ('A549', 'Fibrop', 'Gcbcell', 'Gliobl','Cerebellumfrontaloc', 'Frontal_cortex_OC', 'Chorion',
+		'Cll','Fibrobl','Colo829','Ecc1', 'Cerebellumoc', 
+		'Adultcd4th0', 'Adultcd4th0','Aosmc','Cd20ro01794', 
+		'8988t','Nha','Nhdfad','Hmec','Hepg2','Hsmm',
+		'Gm13977', 'Gm13976', 'Gm12892','Gm12891','Gm12878','Gm10248','Gm10266',
+		'Huh7','Gm18507', 'Gm19238', 'Gm19239', 'Gm19240', 'Gm200000', 'H7hesc',
+		'Hek293t', 'Hepatocytes', 'H7es', 'H9es', 'Heartoc', 'H1hesc','Helas3',
+		'Htr8','Hpde6e6e7', 'Osteo','Huvec','Imr90','Ips','Ishikawa','K562','LnCaP',
+		'Nhlf','Mcf7','Medullo','Mel2183','Melano','Monocd14','Myometr',
+		'Naivebcell', 'Olfneurosphere','Panisd','Panislets','Phte',
+		'ProgFib','Psoasmuscleoc', 'Rwpe1','Sknsh', 'Stellate','T47d', 'Nhek','Nb4',
+		'Urot');
+		#cell line also includes Osteobl, but not included in tuple
+		#cell line also includes Fibroblgm03348, but not included in tuple
+		#cell line also includes Fibropag08395, but not included in tuple
+		#cell line also includes Fibropag08396, but not included in tuple
+		#cell line also includes Fibropag20443, but not included in tuple
+		#cell line also includes Hsmmemb, but not included in tuple
+		#cell line also includes Hsmmfshd, but not included in tuple
+		#cell line also includes Hsmmt, but not included in tuple
+		#cell line also includes Huh75, but not included in tuple
+		#cell line also includes Ipscwru1, but not included in tuple
+		#cell line also includes Ipsnihi7, but not included in tuple
+		#cell line also includes Ipsnihi11, but not included in tuple
+		#cell line also includes Medullod341, but not included in tuple
+		
+		
+		filetype = ('BroadHistone','OpenChrom','SydhTfbs','UwHistone')		
+		for item in newlist:
+			Histone = "Histone_ChIP-seq"
+			with open(sys.argv[2],'a') as outfile:
+				outfile.write("\n%s" % item)
+				outfile.close()
+			new = item							
+			if new.startswith("wgEncode"):
+				tar = new[8:]
+				tar = tar[:-4]
+				if tar.endswith("V"):
+					tar = tar[:-2]
+				tar = tar[:-6]
+				if tar.endswith("Std"):
+					tar = tar[:-3]
+			if new.startswith("S1."):
+				with open(sys.argv[2], 'a') as outfile:
+					outfile.write(", Histone_ChIPseq, ['SCC25_1'], H3K27ac")
+					outfile.close()
+			if new.startswith("S2."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['SCC25_1'], H3K4me1")
+                                        outfile.close()
+                        if new.startswith("S3."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['SCC25_1'], H3K4me3")
+                                        outfile.close()
+                        if new.startswith("S4."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['SCC25_1'], mock_rabbit IgG")
+                                        outfile.close()
+                        if new.startswith("S5."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['SCC25_1'], H3K36me3")
+                                        outfile.close()
+                        if new.startswith("S6."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['SCC25_1'], H3K27me3")
+                                        outfile.close()
+                        if new.startswith("S8."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['SCC25_1'], Input")
+                                        outfile.close()
+                        if new.startswith("S9."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['SCC25_2'], H3K27ac")
+                                        outfile.close()
+                        if new.startswith("S10."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['SCC25_2'], H3K4me1")
+                                        outfile.close()
+                        if new.startswith("S11."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['SCC25_2'], H3K4me3")
+                                        outfile.close()
+                        if new.startswith("S12."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['SCC25_2'], mock_rabbit IgG")
+                                        outfile.close()
+                        if new.startswith("S13."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['SCC25_2'], H3K36me3")
+                                        outfile.close()
+                        if new.startswith("S14."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['SCC25_2'], H3K27me3")
+                                        outfile.close()
+                        if new.startswith("S16."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['SCC25_2'], Input")
+                                        outfile.close()
+                        if new.startswith("S25."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['OK_2'], H3K27ac")
+                                        outfile.close()
+                        if new.startswith("S26."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['OK_2'], H3K4me1")
+                                        outfile.close()
+                        if new.startswith("S27."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['OK_2'], H3K4me3")
+                                        outfile.close()
+                        if new.startswith("S28."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['OK_2'], mock_rabbit IgG")
+                                        outfile.close()
+                        if new.startswith("S29."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['OK_2'], H3K36me3")
+                                        outfile.close()
+                        if new.startswith("S30."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['OK_2'], H3K27me3")
+                                        outfile.close()
+                        if new.startswith("S32."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['OK_2'], Input")
+                                        outfile.close()
+                        if new.startswith("S33."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['OK_3'], H3K27ac")
+                                        outfile.close()
+                        if new.startswith("S34."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['OK_3'], H3K4me1")
+                                        outfile.close()
+                        if new.startswith("S35."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['OK_3'], H3K4me3")
+                                        outfile.close()
+                        if new.startswith("S36."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['OK_3'], mock_rabbit IgG")
+                                        outfile.close()
+                        if new.startswith("S37."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['OK_3'], H3K36me3")
+                                        outfile.close()
+                        if new.startswith("S38."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['OK_3'], H3K27me3")
+                                        outfile.close()
+                        if new.startswith("S39."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", Histone_ChIPseq, ['OK_3'], Input")
+                                        outfile.close()
+                        if new.startswith("S49."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", ChIPseq, ['OK_4'], CTCF")
+                                        outfile.close()	
+                        if new.startswith("S50."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", ChIPseq, ['OK_5'], CTCF")
+                                        outfile.close()
+                        if new.startswith("S51."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", ChIPseq, ['SCC25_3'], CTCF")
+                                        outfile.close()
+                        if new.startswith("S52."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", ChIPseq, ['SCC25_4'], CTCF")
+                                        outfile.close()
+                        if new.startswith("SCC25_2A4."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", ChIPseq, ['SCC25'], P63")
+                                        outfile.close()
+                        if new.startswith("SCC25_501A"):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", ChIPseq, ['SCC25'], ETS1")
+                                        outfile.close()
+                        if new.startswith("SCC25-c20-30_rep1."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", ChIPseq, ['SCC25'], ETS1")
+                                        outfile.close()
+                        if new.startswith("SCC25-c20-30_rep2."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", ChIPseq, ['SCC25'], ETS1")
+                                        outfile.close()
+                        if new.startswith("S45_SCC25_r1."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", RNA-seq, ['SCC25']")
+                                        outfile.close()
+                        if new.startswith("S46_SCC25_r2."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", RNA-seq, ['SCC25']")
+                                        outfile.close()
+                        if new.startswith("S47_OK_r1."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", RNA-seq, ['OK']")
+                                        outfile.close()
+                        if new.startswith("S48_OK_r2"):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", RNA-seq, ['OK']")
+                                        outfile.close()
+                        if new.startswith("M1."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", ATAC_seq, ['SCC25']")
+                                        outfile.close()
+                        if new.startswith("M2."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", ATAC_seq, ['SCC25']")
+                                        outfile.close()
+                        if new.startswith("M3."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", ATAC_seq, ['SCC25']")
+                                        outfile.close()
+                        if new.startswith("S42."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", ATAC_seq, ['SCC25']")
+                                        outfile.close()
+                        if new.startswith("S41."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", ATAC_seq, ['SCC25']")
+                                        outfile.close()
+                        if new.startswith("S43."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", ATAC_seq, ['OK']")
+                                        outfile.close()
+                        if new.startswith("S44."):
+                                with open(sys.argv[2], 'a') as outfile:
+                                        outfile.write(", ATAC_seq, ['OK']")
+                                        outfile.close()
+					
+			diction = {}
+			for item in filetype:
+                                file = item
+                                if file in new:
+                                        diction = {'b':[]}
+					diction['b'].append(file)
+					filedictionary = diction['b']
+					lenfile = len(file)		
+					if tar.startswith(file):
+						tar = tar[lenfile:]
+					if filedictionary == ['BroadHistone']:
+                                                filedictionary = 'Histone_ChipSeq'
+					if filedictionary == ['OpenChrom']:
+						filedictionary = 'OpenChrom'
+					if filedictionary == ['SydhTfbs']:
+						filedictionary = 'SydhTfbs'
+					if filedictionary == ['UwHistone']:
+						filedictionary = 'UwHistone'
+					with open(sys.argv[2],'a') as outfile:
+		                                outfile.write(",%s" % filedictionary)
+                		                outfile.close()
+				else: 
+					continue
+					
+
+			dict = {} 
+			for item in cellline:
+				cellitem = item
+
+				if cellitem in new:
+					if "Osteobl" in new and "Osteo" in new:
+                                                cellitem = "Osteobl"	
+					if "Fibroblgm03348" in new and "Fibrobl" in new:
+						cellitem = "Fibroblgm03348"
+					if "Fibropag08395" in new and "Fibrop" in new:
+                                                cellitem = "Fibroblgm03348"
+					if "Fibropag08396" in new and "Fibrop" in new:
+                                                cellitem = "Fibroblgm03348"
+					if "Fibropag20443" in new and "Fibrop" in new:
+                                                cellitem = "Fibroblgm03348"
+					if "Hsmm" in new and "Hsmmemb" in new:
+						cellitem = "Hsmmemb"
+					if "Hsmmfshd" in new and "Hsmm" in new:
+						cellitem = "Hsmmfshd" 
+					if "Hsmm" in new and "Hsmmt" in new:
+                                                cellitem = "Hsmmt"
+					if "Huh7" in new and "Huh75" in new:
+                                                cellitem = "Huh75"
+					if "Ips" in new and "Ipscwru1" in new:
+						cellitem = "Ipscwru1"
+
+
+					cellstarts =  tar.index(cellitem)
+                        		cellends = cellstarts + len(cellitem)
+					tar = tar[:cellstarts] + tar[cellends:]
+					
+					dict = {cellitem:[]}
+					
+					dict['a'].append(cellitem)						
+					celldictionary = dict['a']
+					with open(sys.argv[2],'a') as outfile:
+		                                outfile.write(",%s" % celldictionary)
+                		                outfile.close()
+					with open(sys.argv[2], 'a') as outfile:
+                                                outfile.write(",%s\n" % tar)
+                                                outfile.close()
+				
+
+				else:
+					continue
+
+							
+	
+main ()
+
+
